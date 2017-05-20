@@ -209,7 +209,7 @@ def check_image(img):
     heatmap = np.zeros_like(img[:,:,0]).astype(np.float)
     
     ystart = 400
-    ystop = 528#528#656 #528
+    ystop = 528
     scale = 1.2
 
     box_list1 = find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, cell_per_block, spatial_size, hist_bins, hog_channel=hog_channel, color_space=color_space, window=64, spatial_feat=spatial_feat, hist_feat=hist_feat, hog_feat=hog_feat)
@@ -220,12 +220,9 @@ def check_image(img):
     
     box_list2 = find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, cell_per_block, spatial_size, hist_bins, hog_channel=hog_channel, color_space=color_space, window=64, spatial_feat=spatial_feat, hist_feat=hist_feat, hog_feat=hog_feat)
 
-    box_list = box_list1 + box_list2
-    # Add heat to each box in box list
-    #heat = add_heat(heat,box_list)
+    box_list = box_list1 + box_list2    
     
     # Apply threshold to help remove false positives
-    #heat = apply_threshold(heat,4)
     heat_box.add_heat(box_list)
     heatmap = heat_box.get_heatmap()
 

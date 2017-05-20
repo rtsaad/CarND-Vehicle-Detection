@@ -81,6 +81,7 @@ The set of features selected includes:
 * Spatial binning of size 16x16 pixel resolution;
 * Color histogram with 68 bins and range of 0 to 256;
 * Histogram of oriented Gradients of the Y channel with 8 orientations and cells of 8x8 pixels;
+* Finally, all features are scaled to zero mean and unit variance.
 
 <!-- 
 After the training data is loaded, the set of cars are shuffled before splitting into Train and Test Set. We shuffle the data to try to remove the over fitting caused by the sequence of images when the data is extracted from a video.  
@@ -116,17 +117,15 @@ It is important to mention that the Histogram of Oriented Gradients features alo
 
 The code for this step is contained at function 'get_hog_features' from the 'feature.py' file (lines 42-59).
 
-### Feature Vector
-
+### Feature Vector and Normalization
  	
-Our final feature vector uses YCbCr color space with 16x16 spatial binning, color histogram with 64 bins and the HOG features from the Y color channel. Figure 5 shows our complete Feature vector, which has 2528 features.
+Our final feature vector uses YCbCr color space with 16x16 spatial binning, color histogram with 64 bins and the HOG features from the Y color channel. It is important to mention that our final vector is normalized, in other words, it is scaled to zero mean and unit variance. Figure 5 shows our complete Feature vector, which has 2528 features.
 
 ![alt text][image6]
 
 ## 6. Classifier
 
-We have tested different classifiers analyzing both the accuracy and the execution time to process the 'project_video' file. Figure 6 presents all three classifier we have tested. The best result was achieved using the SVM with the kernel RBF, which resulted in a smooth video without practically no false positive. However, the execution time is significantly high. 
-On the opposite, we have the decision tree classifier that is fast to process but results with a significant number of false positives. Finally, we have the SVM with linear kernel which gives a reasonable result (with just a few false positives) within an acceptable runtime. (For all the videos, we have used a technique of heatmap over several frames to reduce the number of false positives). 
+We have tested different classifiers analyzing both the accuracy and the execution time to process the 'project_video' file. Figure 6 presents all three classifier we have tested. The best result was achieved using the SVM with the kernel RBF, which resulted in a smooth video without practically no false positive. However, the execution time is significantly high. On the opposite, we have the decision tree classifier that is fast to process but results with a significant number of false positives. Finally, we have the SVM with linear kernel which gives a reasonable result (with just a few false positives) within an acceptable runtime. (For all the videos, we have used a technique of heatmap over several frames to reduce the number of false positives). 
 
 | Classifier    |  Parameter    | Accuracy      | Link Video | Execution Time| False Positive |
 |:-------------:|:-------------:|:-------------:|:-------------:| :-------------:|:-------------:|
@@ -159,19 +158,19 @@ Figure 9 shows an example of a vehicle detection using our complete pipeline (fe
 
 ## 8. Video Implementation
 
-Our best result was achieved using the SVM classifier with 'rbf' kernel. Our pipeline of operations performed reasonably well on the entire project video, detecting vehicles and with an almost negligible error rate (only 1 false positive error). Here are the videos using our [SVM-RBF](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/run_rbf.mp4) and [SVM-Linear](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/run_linear.mp4). In addition, we also processed a video with lane detection: [Vehicle-And-Lane-Detection]().
+Our best result was achieved using the SVM classifier with 'rbf' kernel. Our pipeline of operations performed reasonably well on the entire project video, detecting vehicles and with an almost negligible error rate (only 1 false positive error). Here are the videos using our [SVM-RBF](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/run_rbf.mp4) and [SVM-Linear](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/run_linear.mp4). In addition, we also processed a video with lane detection: [Vehicle-And-Lane-Detection-RBF](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/all_rbf.mp4) and [Vehicle-And-Lane-Detection-Linear](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/all_linear.mp4).
 
 The code for this step is contained at  'pipeline.py' file.
 
 ## 9. False Positive (Heatmap)
 
-We use heatmaps from scipy package (`scipy.ndimage.measurements.label()`) to combine overlapping detections and to remove false positives. Every window the classify detect (possible vehicle) increments its box position into a heatmap. After all box are included into the heatmap, we threshold it in order to remove false positives. Figure 10 and 11 show some examples of overlapping boxes and the resulting heatmap.
+We use heatmaps from scipy package (`scipy.ndimage.measurements.label()`) to combine overlapping detections and to remove false positives. Every window the classify detect (possible vehicle) increments its box position into a heatmap. After all box are included into the heatmap, we threshold it in order to remove false positives. Figure 10 and 11 show some examples of overlapping boxes and the resulting heatmap. The code for this step is contained at the 'window.py' file (lines 27-55).
 
 ![alt text][image8]
 
 ![alt text][image9]
 
-Finally, we also have implemented a class to hold the last 15 frames in order to smooth the drawing of boxes and also to remove false positives. This class holds all detected windows for the last 15 frames and use all of them together for the heatmap. Then, the heatmap is threshold with a value higher than the number of frames stored. The code for this class is presented below:
+Finally, we also have implemented a class to hold the last 15 frames in order to smooth the drawing of boxes and also to remove false positives. This class holds all detected windows for the last 15 frames and use all of them together for the heatmap. Then, the heatmap is threshold with a value higher than the number of frames stored (use 120% of the number of frames stored in a given time as threshold). The code for this class is presented below:
 
 
 ```python
