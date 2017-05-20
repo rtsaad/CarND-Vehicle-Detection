@@ -46,7 +46,7 @@ This project requires the following python packages to work:
 
 ### Executing the Pipeline
 
-To detect the lane lines, call the following command, together with the file names for the input and output videos.
+To detect the vehicles, call the following command, together with the file names for the input and output videos.
 
 ```sh
 
