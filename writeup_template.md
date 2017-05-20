@@ -1,18 +1,11 @@
-##Writeup Template
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
 
----
+# Vehicle Detection 
 
-**Vehicle Detection Project**
+This project consists of a python script to detect vehicles from an image for self-driving purpose. It uses Image Recognition techniques to identify vehicles and draw contour boxes over the vehicles on the original image. The script itself can work over one or a sequence of images (i.e. video).
 
-The goals / steps of this project are the following:
+The main goals of this project is to develop a sequence of operations (pipeline) that gets as input a raw image and outputs an annotate image where the vehicles are marked inside blue boxes. Figures 1 and 2 depict examples of the input and output images.
 
-* Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
-* Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
-* Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
-* Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
-* Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
-* Estimate a bounding box for vehicles detected.
+![alt text][image1]
 
 [//]: # (Image References)
 [image1]: ./examples/car_not_car.png
@@ -23,6 +16,62 @@ The goals / steps of this project are the following:
 [image6]: ./examples/labels_map.png
 [image7]: ./examples/output_bboxes.png
 [video1]: ./project_video.mp4
+
+
+## 1.Access 
+
+The source code for this project is available at [project code]().
+
+## 2.Files
+
+The following files are part of this project:
+* window.py:     Camera functions for calibration and perspective transform;
+* features.py:   Gradient functions to construc a binary image;
+* classifier.py:       Lane functions to keep track, smooth and plot the lane into the video output;
+* pipeline.py:   Script to execute the lane detction pipeline of operations;
+* output_images: 
+** 
+
+
+### Dependency
+
+This project requires the following python packages to work:
+* openvc
+* numpy
+* matplotlib
+* moviepy
+* pickle
+
+## 3.How to use this project
+
+### Executing the Pipeline
+
+To detect the lane lines, call the following command, together with the file names for the input and output videos.
+
+```sh
+
+python pipeline.py input_video output_video
+
+```
+
+## 4. Project - Introduction
+
+
+The goals of this project is to detect Vehicles from a video streaming. Therefore, there are fives necessary steps to accomplish this task, they are:
+
+* Load the trainning data (cars and non cars images);
+* Extract the features from the images that best defines the vehicle. We have used the YCrCb 
+* Normalize the features, split randomize the data into training and testing data; 
+* 
+
+Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
+* Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
+* Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
+* Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
+* Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
+* Estimate a bounding box for vehicles detected.
+
+
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
 ###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
