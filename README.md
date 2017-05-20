@@ -9,7 +9,7 @@ The main goals of this project is to develop a sequence of operations (pipeline)
 
 [//]: # (Image References)
 [image1]: ./output_images/output.png
-[image2]: ./output_images/examples.png
+[image2]: ./output_images/example.png
 [image3]: ./output_images/car_feature_spatial_feat.png
 [image4]: ./output_images/car_feature_hist_feat.png
 [image5]: ./output_images/car_feature_hog_feat.png
@@ -26,10 +26,10 @@ The source code for this project is available at [project code](https://github.c
 ## 2.Files
 
 The following files are part of this project:
-* window.py:     Camera functions for calibration and perspective transform;
-* features.py:   Gradient functions to construct a binary image;
-* classifier.py:       Lane functions to keep track, smooth and plot the lane into the video output;
-* pipeline.py:   Script to execute the lane detection pipeline of operations;
+* window.py:     Sliding window functions to detect vehicles;
+* features.py:   Functions to define the feature vector;
+* classifier.py: Classifier to detect vehicles;
+* pipeline.py:   Script to execute the vehicle detection pipeline of operations;
 
 
 

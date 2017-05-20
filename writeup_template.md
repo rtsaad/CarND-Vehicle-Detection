@@ -9,7 +9,7 @@ The main goals of this project is to develop a sequence of operations (pipeline)
 
 [//]: # (Image References)
 [image1]: ./output_images/output.png
-[image2]: ./output_images/examples.png
+[image2]: ./output_images/example.png
 [image3]: ./output_images/car_feature_spatial_feat.png
 [image4]: ./output_images/car_feature_hist_feat.png
 [image5]: ./output_images/car_feature_hog_feat.png
