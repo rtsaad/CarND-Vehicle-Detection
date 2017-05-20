@@ -11,17 +11,17 @@ The main goals of this project is to develop a sequence of operations (pipeline)
 [image1]: ./output_images/output.png
 [image2]: ./output_images/examples.png
 [image3]: ./output_images/car_feature_spatial_feat.png
-[image4]: ./output_images/car_feature_hist_feat.jpg
-[image5]: ./output_images/car_feature_hog_feat.jpg
+[image4]: ./output_images/car_feature_hist_feat.png
+[image5]: ./output_images/car_feature_hog_feat.png
 [image6]: ./output_images/car_feature_all_feat.png
 [image7]: ./output_images/window_bboxes.png
 [image8]: ./output_images/heatmap1.png
-[video9]: ./output_images/heatmap2.png
+[image9]: ./output_images/heatmap2.png
 
 
 ## 1.Access 
 
-The source code for this project is available at [project code]().
+The source code for this project is available at [project code](https://github.com/otomata/CarND-Vehicle-Detection).
 
 ## 2.Files
 
@@ -130,9 +130,9 @@ On the opposite, we have the decision tree classifier that is fast to process bu
 
 | Classifier    |  Parameter    | Accuracy      | Link Video | Execution Time| False Positive |
 |:-------------:|:-------------:|:-------------:|:-------------:| :-------------:|:-------------:|
-| SVM / RBF	| C = 10	| 0.9972	| | 66 min | No |
-| SVM / LINEAR	| C = 0.1	| 0.9873	| | 27 min | Few|
-| Decision Tree	| Min samples= 10, Max depth =	20 | 0.9727 | 11 min | Yes |
+| SVM / RBF	| C = 10	| 0.9972	| [video](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/run_rbf.mp4)| 66 min | No |
+| SVM / LINEAR	| C = 0.1	| 0.9873	| [video](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/run_linear.mp4)| 27 min | Few|
+| Decision Tree	| Min samples= 10, Max depth =	20 | 0.9727 | [video](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/run_decision.mp4) | 11 min | Yes |
 
 From the table above, all three classifier yield reasonable good accuracy, with an slight difference of 1-2% among them. However, the number of false positive among them when processing the videos raises questions. However, it is important to mention that training data comes from video streaming, resulting with a sequence of images where target objects appear almost identical in whole series of images. The problem is that we can not guarantee that our test set does not hold nearly identical images of the train set.
 
@@ -156,10 +156,10 @@ Figure 9 shows an example of a vehicle detection using our complete pipeline (fe
 
 ![alt text][image1]
 
--
+
 ## 8. Video Implementation
 
-Our best result was achieved using the SVM classifier with 'rbf' kernel. Our pipeline of operations performed reasonably well on the entire project video, detecting vehicles and with an almost negligible error rate (only 1 false positive error). The resulting video is available at this [link](./project_video.mp4).
+Our best result was achieved using the SVM classifier with 'rbf' kernel. Our pipeline of operations performed reasonably well on the entire project video, detecting vehicles and with an almost negligible error rate (only 1 false positive error). Here are the videos using our [SVM-RBF](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/run_rbf.mp4) and [SVM-Linear](https://github.com/otomata/CarND-Vehicle-Detection/blob/submit/output_images/run_linear.mp4). In addition, we also processed a video with lane detection: [Vehicle-And-Lane-Detection]().
 
 The code for this step is contained at  'pipeline.py' file.
 
@@ -201,7 +201,7 @@ class HeatMap():
                 heatmap[box[0][1]:box[1][1], box[0][0]:box[1][0]] += 1                
             
         # Return thresholded map
-        heatmap[heatmap <= len(self.box_n)*(2)] = 0     #1.1 
+        heatmap[heatmap <= len(self.box_n)*(1.2)] = 0    
 
         return heatmap
 
